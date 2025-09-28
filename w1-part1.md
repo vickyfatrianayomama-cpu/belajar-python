@@ -881,7 +881,7 @@ cuaca_data = [
 ### Latihan Praktik
 
 **Latihan 1: Program Biodata**
-Buat program yang meminta input biodata lengkap dan simpan dalam dictionary.
+Buat program yang menampilkan biodata lengkap dan simpan dalam dictionary.
 
 **Latihan 2: Analisis Data Siswa**
 Buat program untuk mengelola data nilai siswa dengan berbagai mata pelajaran.
