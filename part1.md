@@ -1,1401 +1,834 @@
-# MODUL 3: MANAJEMEN FILE, MODUL, DAN TEKNIK LANJUTAN PYTHON
-## Program Studi Teknik Informatika
-### Mata Kuliah: Pemrograman Python
+# MODUL 1: DASAR-DASAR PYTHON
+**Tipe Data dan Struktur Data Fundamental**
 
 ---
 
-## DESKRIPSI MODUL
+## CHAPTER 1: TIPE DATA DASAR PYTHON
 
-Modul ini membahas aspek lanjutan dalam pemrograman Python yang meliputi manajemen file, konsep modul dan package, serta teknik-teknik pemrograman lanjutan. Mahasiswa akan mempelajari cara membaca dan menulis file, membuat dan menggunakan modul, menangani error dengan exception handling, dan menerapkan teknik web scraping serta tips dan trik Python untuk pengembangan aplikasi yang lebih kompleks.
+### 1.1 Pengenalan Tipe Data
+
+Python memiliki beberapa tipe data built-in yang fundamental:
+- **Integer (int)**: Bilangan bulat
+- **Float**: Bilangan desimal
+- **String (str)**: Teks
+- **Boolean (bool)**: True/False
+
+### 1.2 Integer (Bilangan Bulat)
+
+```python
+# Contoh integer
+umur = 25
+jumlah_siswa = 30
+tahun = 2024
+
+# Operasi matematika dengan integer
+a = 10
+b = 3
+print(f"Penjumlahan: {a + b}")
+print(f"Pengurangan: {a - b}")
+print(f"Perkalian: {a * b}")
+print(f"Pembagian: {a / b}")    # Hasil: float
+print(f"Pembagian bulat: {a // b}")  # Hasil: int
+print(f"Modulo: {a % b}")
+```
+
+### 1.3 Float (Bilangan Desimal)
+
+```python
+# Contoh float
+tinggi = 175.5
+berat = 65.2
+pi = 3.14159
+
+# Operasi dengan float
+suhu_celsius = 25.5
+suhu_fahrenheit = (suhu_celsius * 9/5) + 32
+print(f"{suhu_celsius}°C = {suhu_fahrenheit}°F")
+
+# Precision dan rounding
+import math
+nilai = 3.14159
+print(f"Dibulatkan: {round(nilai, 2)}")
+print(f"Floor: {math.floor(nilai)}")
+print(f"Ceiling: {math.ceil(nilai)}")
+```
+
+### 1.4 String (Teks)
+
+```python
+# Membuat string
+nama = "Ahmad Fauzi"
+kota = 'Jakarta'
+alamat = """Jl. Merdeka No. 123
+Jakarta Pusat
+Indonesia"""
+
+# String methods
+print(nama.upper())
+print(nama.lower())
+print(nama.title())
+print(len(nama))
+
+# String formatting
+umur = 25
+print(f"Nama saya {nama}, umur {umur} tahun")
+print("Nama saya {}, umur {} tahun".format(nama, umur))
+```
+
+### 1.5 Boolean (Benar/Salah)
+
+```python
+# Boolean values
+is_student = True
+is_working = False
+has_license = True
+
+# Boolean operations
+print(is_student and has_license)  # AND
+print(is_student or is_working)    # OR
+print(not is_working)              # NOT
+
+# Comparison menghasilkan boolean
+a = 5
+b = 3
+print(a > b)   # True
+print(a == b)  # False
+print(a != b)  # True
+```
+
+### 1.6 Konversi Tipe Data
+
+```python
+# Konversi antar tipe data
+angka_str = "123"
+angka_int = int(angka_str)  # String ke integer
+angka_float = float(angka_str)  # String ke float
+
+nilai = 95.7
+nilai_int = int(nilai)          # Float ke integer (95)
+nilai_str = str(nilai)          # Float ke string
+
+# Konversi boolean
+print(bool(1))    # True
+print(bool(0))    # False
+print(bool(""))   # False
+print(bool("text"))  # True
+
+# Contoh konversi dalam konteks
+def konversi_suhu(celsius_str):
+    """Konversi string celsius ke fahrenheit"""
+    celsius = float(celsius_str)
+    fahrenheit = (celsius * 9/5) + 32
+    return fahrenheit
+
+hasil_konversi = konversi_suhu("25.5")
+print(f"Hasil konversi: {hasil_konversi}")
+print(f"Tipe data: {type(hasil_konversi)}")
+```
+
+### 🧠 Mini Quiz - Chapter 1
+
+**Soal 1:** Apa output dari kode berikut?
+```python
+x = "123"
+y = int(x) + 7
+print(y)
+```
+a) "1237"  b) 130  c) Error  d) "130"
+
+**Soal 2:** Tipe data apa yang dihasilkan dari operasi `5 / 2`?
+a) int  b) float  c) str  d) bool
+
+**Soal 3:** Manakah yang TIDAK termasuk tipe data primitif di Python?
+a) int  b) float  c) list  d) bool
+
+### 💪 Mini Exercise - Chapter 1
+
+**Latihan 1:** Buatlah program yang:
+- Meminta input nama (string)
+- Meminta input umur (integer) 
+- Meminta input tinggi badan (float)
+- Tampilkan informasi dengan format yang rapi
+
+**Latihan 2:** Konversi tipe data berikut dan tampilkan hasilnya:
+```python
+a = "3.14"
+b = 42
+c = True
+# Konversi a ke float, b ke string, c ke integer
+```
+
+**Jawaban Mini Quiz:**
+1. b) 130
+2. b) float  
+3. c) list
 
 ---
 
-## CAPAIAN PEMBELAJARAN
+## CHAPTER 2: STRUKTUR DATA - LISTS
 
-### Capaian Pembelajaran Umum
-Setelah menyelesaikan modul ini, mahasiswa diharapkan dapat:
-1. Mengelola file dan direktori menggunakan Python
-2. Membuat dan menggunakan modul untuk organisasi kode yang lebih baik
-3. Menangani error dan exception dengan tepat
-4. Mengimplementasikan teknik web scraping untuk mengambil data dari website
-5. Menerapkan tips dan trik Python untuk meningkatkan efisiensi programming
-6. Merancang aplikasi Python yang modular dan maintainable
+### 2.1 Pengenalan List
 
-### Pemetaan Capaian Pembelajaran Berdasarkan LOTS dan HOTS
-
-#### LOTS (Lower Order Thinking Skills)
-- **Remember (C1):** Mengingat sintaks file I/O, import statement, dan exception handling
-- **Understand (C2):** Menjelaskan konsep modul, package, dan manajemen file
-- **Apply (C3):** Menerapkan operasi file dan menggunakan modul built-in Python
-
-#### HOTS (Higher Order Thinking Skills)
-- **Analyze (C4):** Menganalisis struktur aplikasi dan membuat modul yang efisien
-- **Evaluate (C5):** Mengevaluasi keamanan dan efisiensi dalam file handling dan web scraping
-- **Create (C6):** Merancang aplikasi kompleks dengan arsitektur modular
-
----
-
-## CHAPTER 1: MANAJEMEN FILE
-
-### 1.1 Membaca File
-
-Python menyediakan berbagai cara untuk membaca file dengan fungsi `open()`.
+List adalah struktur data berurutan yang bisa menyimpan berbagai tipe data:
 
 ```python
-# Membaca file teks sederhana
-def baca_file_sederhana(nama_file):
-    """Membaca seluruh isi file sekaligus"""
-    try:
-        with open(nama_file, 'r', encoding='utf-8') as file:
-            isi = file.read()
-            return isi
-    except FileNotFoundError:
-        return f"File {nama_file} tidak ditemukan"
-    except Exception as e:
-        return f"Error membaca file: {e}"
+# Membuat list
+buah = ["apel", "pisang", "jeruk"]
+angka = [1, 2, 3, 4, 5]
+campuran = ["Ahmad", 25, 175.5, True]
 
-# Membaca file baris per baris
-def baca_file_per_baris(nama_file):
-    """Membaca file baris demi baris"""
-    try:
-        with open(nama_file, 'r', encoding='utf-8') as file:
-            baris_list = []
-            for nomor, baris in enumerate(file, 1):
-                baris_list.append(f"Baris {nomor}: {baris.strip()}")
-            return baris_list
-    except FileNotFoundError:
-        return [f"File {nama_file} tidak ditemukan"]
+# List kosong
+keranjang = []
+belanja = list()
 
-# Membaca file dengan readline()
-def baca_beberapa_baris(nama_file, jumlah_baris=5):
-    """Membaca beberapa baris pertama dari file"""
-    try:
-        with open(nama_file, 'r', encoding='utf-8') as file:
-            baris_list = []
-            for i in range(jumlah_baris):
-                baris = file.readline()
-                if not baris:  # Jika sudah mencapai akhir file
-                    break
-                baris_list.append(baris.strip())
-            return baris_list
-    except FileNotFoundError:
-        return [f"File {nama_file} tidak ditemukan"]
+print(f"Buah: {buah}")
+print(f"Panjang list: {len(buah)}")
 ```
 
-### 1.2 Menulis File
-
-Berbagai mode penulisan file untuk kebutuhan yang berbeda.
+### 2.2 Mengakses Elemen List
 
 ```python
-# Menulis file baru (overwrite jika sudah ada)
-def tulis_file_baru(nama_file, konten):
-    """Menulis file baru atau menimpa file yang sudah ada"""
-    try:
-        with open(nama_file, 'w', encoding='utf-8') as file:
-            file.write(konten)
-        return f"Berhasil menulis ke file {nama_file}"
-    except Exception as e:
-        return f"Error menulis file: {e}"
+makanan = ["nasi", "ayam", "sayur", "buah"]
 
-# Menambah konten ke file yang sudah ada
-def tambah_ke_file(nama_file, konten):
-    """Menambahkan konten ke akhir file"""
-    try:
-        with open(nama_file, 'a', encoding='utf-8') as file:
-            file.write(konten + '\n')
-        return f"Berhasil menambah konten ke {nama_file}"
-    except Exception as e:
-        return f"Error menambah ke file: {e}"
+# Akses dengan index (dimulai dari 0)
+print(f"Makanan pertama: {makanan[0]}")
+print(f"Makanan terakhir: {makanan[-1]}")
 
-# Menulis list ke file
-def tulis_list_ke_file(nama_file, data_list):
-    """Menulis setiap elemen list ke baris terpisah"""
-    try:
-        with open(nama_file, 'w', encoding='utf-8') as file:
-            for item in data_list:
-                file.write(str(item) + '\n')
-        return f"Berhasil menulis {len(data_list)} item ke {nama_file}"
-    except Exception as e:
-        return f"Error menulis list ke file: {e}"
-
-# Contoh penggunaan
-data_mahasiswa = [
-    "Ahmad Fauzi - 12345 - Teknik Informatika",
-    "Siti Aminah - 67890 - Sistem Informasi", 
-    "Budi Santoso - 11111 - Teknik Elektro"
-]
-
-print(tulis_list_ke_file("mahasiswa.txt", data_mahasiswa))
-print(baca_file_per_baris("mahasiswa.txt"))
+# Slicing
+print(f"2 makanan pertama: {makanan[:2]}")
+print(f"2 makanan terakhir: {makanan[-2:]}")
+print(f"Makanan tengah: {makanan[1:3]}")
 ```
 
-### 1.3 Operasi File Lanjutan
+### 2.3 Operasi pada List
 
 ```python
-import os
-import shutil
-from pathlib import Path
+# Menambah elemen
+hobi = ["membaca", "menulis"]
+hobi.append("coding")        # Tambah di akhir
+hobi.insert(1, "traveling")  # Tambah di posisi tertentu
 
-# Cek keberadaan file
-def cek_file_ada(nama_file):
-    """Mengecek apakah file atau direktori ada"""
-    path = Path(nama_file)
-    return {
-        'ada': path.exists(),
-        'adalah_file': path.is_file(),
-        'adalah_direktori': path.is_dir(),
-        'ukuran': path.stat().st_size if path.exists() else 0
-    }
+print(f"Hobi: {hobi}")
 
-# Operasi file dan direktori
-def operasi_file_direktori():
-    """Demonstrasi berbagai operasi file dan direktori"""
-    try:
-        # Membuat direktori
-        os.makedirs("data/backup", exist_ok=True)
-        print("Direktori 'data/backup' dibuat")
-        
-        # Membuat file contoh
-        with open("data/contoh.txt", "w") as f:
-            f.write("Ini file contoh untuk operasi file")
-        
-        # Copy file
-        shutil.copy("data/contoh.txt", "data/backup/contoh_backup.txt")
-        print("File berhasil dicopy")
-        
-        # List file dalam direktori
-        files = os.listdir("data")
-        print(f"File dalam direktori 'data': {files}")
-        
-        # Rename file
-        os.rename("data/contoh.txt", "data/contoh_renamed.txt")
-        print("File berhasil di-rename")
-        
-        # Informasi file
-        info = cek_file_ada("data/contoh_renamed.txt")
-        print(f"Info file: {info}")
-        
-    except Exception as e:
-        print(f"Error dalam operasi file: {e}")
+# Menghapus elemen
+hobi.remove("menulis")       # Hapus berdasarkan nilai
+deleted = hobi.pop()         # Hapus elemen terakhir
+deleted_index = hobi.pop(0)  # Hapus berdasarkan index
 
-# Membaca file CSV sederhana
-def baca_csv_manual(nama_file, delimiter=','):
-    """Membaca file CSV tanpa menggunakan library pandas"""
-    try:
-        data = []
-        with open(nama_file, 'r', encoding='utf-8') as file:
-            for baris in file:
-                kolom = baris.strip().split(delimiter)
-                data.append(kolom)
-        return data
-    except FileNotFoundError:
-        return [["Error: File tidak ditemukan"]]
-    except Exception as e:
-        return [["Error:", str(e)]]
+print(f"Hobi setelah dihapus: {hobi}")
 
-# Menulis file CSV sederhana
-def tulis_csv_manual(nama_file, data, header=None, delimiter=','):
-    """Menulis data ke file CSV"""
-    try:
-        with open(nama_file, 'w', encoding='utf-8') as file:
-            if header:
-                file.write(delimiter.join(header) + '\n')
-            for baris in data:
-                file.write(delimiter.join(map(str, baris)) + '\n')
-        return f"Data berhasil ditulis ke {nama_file}"
-    except Exception as e:
-        return f"Error menulis CSV: {e}"
-
-# Contoh data dan penggunaan CSV
-data_nilai = [
-    ["Ahmad", 85, 90, 78],
-    ["Siti", 92, 88, 95],
-    ["Budi", 78, 82, 85]
-]
-header = ["Nama", "Matematika", "Fisika", "Kimia"]
-
-print(tulis_csv_manual("nilai.csv", data_nilai, header))
-print(baca_csv_manual("nilai.csv"))
+# Mengubah elemen
+warna = ["merah", "hijau", "biru"]
+warna[0] = "kuning"
+print(f"Warna: {warna}")
 ```
 
-### 1.4 Working with Binary Files
+### 2.4 Operasi List Lanjutan
 
 ```python
-# Membaca dan menulis file binary
-def copy_file_binary(source, destination):
-    """Menyalin file dalam mode binary"""
-    try:
-        with open(source, 'rb') as src:
-            with open(destination, 'wb') as dst:
-                # Baca file dalam chunk untuk file besar
-                chunk_size = 8192
-                while True:
-                    chunk = src.read(chunk_size)
-                    if not chunk:
-                        break
-                    dst.write(chunk)
-        return f"File berhasil dicopy dari {source} ke {destination}"
-    except Exception as e:
-        return f"Error copying file: {e}"
+angka = [3, 1, 4, 1, 5, 9, 2, 6]
 
-# Membaca informasi file
-def info_file_detail(nama_file):
-    """Mendapatkan informasi detail tentang file"""
-    try:
-        stat_info = os.stat(nama_file)
-        return {
-            'ukuran_bytes': stat_info.st_size,
-            'waktu_modifikasi': stat_info.st_mtime,
-            'waktu_akses': stat_info.st_atime,
-            'mode': stat_info.st_mode,
-            'readable': os.access(nama_file, os.R_OK),
-            'writable': os.access(nama_file, os.W_OK),
-            'executable': os.access(nama_file, os.X_OK)
-        }
-    except Exception as e:
-        return f"Error getting file info: {e}"
+# Sorting
+angka_sorted = sorted(angka)      # Buat list baru yang sorted
+print(f"Sorted (baru): {angka_sorted}")
+
+angka.sort()                      # Sort list asli
+print(f"Sorted (asli): {angka}")
+
+# Reverse
+angka.reverse()
+print(f"Reversed: {angka}")
+
+# Pencarian
+print(f"Index of 5: {angka.index(5)}")
+print(f"Count of 1: {angka.count(1)}")
+
+# Copy list
+backup_angka = angka.copy()
+angka_lain = angka[:]  # Alternatif copy
 ```
 
- 
-
-## CHAPTER 2: TIPS DAN TRIK PYTHON
-
-### 2.1 List Comprehensions Lanjutan
+### 2.5 List Comprehension
 
 ```python
-# List comprehension dengan nested loops
-def generate_coordinate_grid(max_x, max_y):
-    """Generate koordinat grid menggunakan list comprehension"""
-    coordinates = [(x, y) for x in range(max_x) for y in range(max_y)]
-    return coordinates
+# List comprehension - cara ringkas membuat list
+angka = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-# Dictionary comprehension
-def buat_kamus_kuadrat(n):
-    """Membuat dictionary dengan angka dan kuadratnya"""
-    return {x: x**2 for x in range(1, n+1)}
+# Kuadrat dari setiap angka
+kuadrat = [x**2 for x in angka]
+print(f"Kuadrat: {kuadrat}")
 
-# Set comprehension
-def huruf_unik(kalimat):
-    """Mendapatkan huruf unik dari kalimat"""
-    return {char.lower() for char in kalimat if char.isalpha()}
+# Bilangan genap saja
+genap = [x for x in angka if x % 2 == 0]
+print(f"Genap: {genap}")
 
-# Generator expression untuk memory efficiency
-def generate_fibonacci(n):
-    """Generator untuk deret Fibonacci"""
-    a, b = 0, 1
-    for _ in range(n):
-        yield a
-        a, b = b, a + b
+# Kombinasi kondisi dan transformasi
+kuadrat_ganjil = [x**2 for x in angka if x % 2 == 1]
+print(f"Kuadrat ganjil: {kuadrat_ganjil}")
 
-# Contoh penggunaan
-print("Koordinat grid 3x3:")
-print(generate_coordinate_grid(3, 3))
-
-print("\nKamus kuadrat 1-10:")
-print(buat_kamus_kuadrat(10))
-
-print("\nHuruf unik dalam 'Hello World':")
-print(huruf_unik("Hello World"))
-
-print("\n10 angka Fibonacci pertama:")
-for fib in generate_fibonacci(10):
-    print(fib, end=" ")
-print()
+# List comprehension dengan string
+nama = ["ahmad", "budi", "citra"]
+nama_kapital = [n.capitalize() for n in nama]
+print(f"Nama kapital: {nama_kapital}")
 ```
 
-### 2.2 Built-in Functions yang Powerful
+### 🧠 Mini Quiz - Chapter 2
 
-```python
-# Menggunakan map, filter, dan reduce
-from functools import reduce
+**Soal 1:** Apa output dari `fruits = ['apel', 'pisang']; print(fruits[1])`?
+a) apel  b) pisang  c) 1  d) Error
 
-def demo_functional_programming():
-    """Demonstrasi functional programming di Python"""
-    angka = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    
-    # Map: transformasi setiap elemen
-    kuadrat = list(map(lambda x: x**2, angka))
-    print(f"Kuadrat: {kuadrat}")
-    
-    # Filter: menyaring elemen berdasarkan kondisi
-    genap = list(filter(lambda x: x % 2 == 0, angka))
-    print(f"Genap: {genap}")
-    
-    # Reduce: menggabungkan elemen menjadi satu nilai
-    jumlah = reduce(lambda x, y: x + y, angka)
-    print(f"Jumlah: {jumlah}")
-    
-    # Kombinasi map dan filter
-    kuadrat_genap = list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, angka)))
-    print(f"Kuadrat genap: {kuadrat_genap}")
+**Soal 2:** Method apa yang digunakan untuk menambah elemen di akhir list?
+a) add()  b) append()  c) insert()  d) push()
 
-# Zip untuk menggabungkan iterables
-def demo_zip():
-    """Demonstrasi penggunaan zip"""
-    nama = ["Ahmad", "Siti", "Budi"]
-    nilai = [85, 92, 78]
-    jurusan = ["TI", "SI", "TE"]
-    
-    # Zip sederhana
-    mahasiswa = list(zip(nama, nilai, jurusan))
-    print("Data mahasiswa:")
-    for mhs in mahasiswa:
-        print(f"Nama: {mhs[0]}, Nilai: {mhs[1]}, Jurusan: {mhs[2]}")
-    
-    # Zip dengan unpacking
-    print("\nDengan unpacking:")
-    for n, nil, jur in zip(nama, nilai, jurusan):
-        print(f"{n} - {jur}: {nil}")
-    
-    # Unzip
-    data = [("A", 1), ("B", 2), ("C", 3)]
-    huruf, angka = zip(*data)
-    print(f"Huruf: {huruf}, Angka: {angka}")
-
-# Enumerate untuk index dan value
-def demo_enumerate():
-    """Demonstrasi enumerate"""
-    buah = ["apel", "mangga", "jeruk", "pisang"]
-    
-    # Enumerate biasa
-    print("Dengan enumerate:")
-    for i, buah_item in enumerate(buah):
-        print(f"{i+1}. {buah_item}")
-    
-    # Enumerate dengan start
-    print("\nDengan start=1:")
-    for i, buah_item in enumerate(buah, start=1):
-        print(f"{i}. {buah_item}")
-
-demo_functional_programming()
-print("\n" + "="*50 + "\n")
-demo_zip()
-print("\n" + "="*50 + "\n")
-demo_enumerate()
-```
-
-### 2.3 String Manipulation Lanjutan
-
-```python
-# String formatting techniques
-def demo_string_formatting():
-    """Demonstrasi berbagai teknik formatting string"""
-    nama = "Ahmad"
-    umur = 25
-    ipk = 3.75
-    
-    # f-strings (Python 3.6+)
-    print(f"Nama: {nama}, Umur: {umur}, IPK: {ipk:.2f}")
-    
-    # format() method
-    print("Nama: {}, Umur: {}, IPK: {:.2f}".format(nama, umur, ipk))
-    
-    # Named placeholders
-    print("Nama: {name}, Umur: {age}, IPK: {gpa:.2f}".format(
-        name=nama, age=umur, gpa=ipk))
-    
-    # % formatting (old style)
-    print("Nama: %s, Umur: %d, IPK: %.2f" % (nama, umur, ipk))
-
-# String methods yang berguna
-def demo_string_methods():
-    """Demonstrasi string methods"""
-    text = "  Python Programming adalah Menyenangkan  "
-    
-    print(f"Original: '{text}'")
-    print(f"Strip: '{text.strip()}'")
-    print(f"Lower: '{text.lower()}'")
-    print(f"Upper: '{text.upper()}'")
-    print(f"Title: '{text.title()}'")
-    print(f"Replace: '{text.replace('Programming', 'Coding')}'")
-    
-    # Split dan join
-    words = text.strip().split()
-    print(f"Words: {words}")
-    print(f"Joined: '{'-'.join(words)}'")
-    
-    # String checking methods
-    email = "user@example.com"
-    print(f"\nEmail checks for '{email}':")
-    print(f"Contains @: {'@' in email}")
-    print(f"Starts with user: {email.startswith('user')}")
-    print(f"Ends with .com: {email.endswith('.com')}")
-
-# Regular expressions untuk pattern matching
-import re
-
-def demo_regex():
-    """Demonstrasi regex untuk pattern matching"""
-    text = "Telepon Ahmad: 081234567890, Email: ahmad@email.com"
-    
-    # Mencari nomor telepon
-    phone_pattern = r'\b\d{12}\b'
-    phones = re.findall(phone_pattern, text)
-    print(f"Nomor telepon: {phones}")
-    
-    # Mencari email
-    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    emails = re.findall(email_pattern, text)
-     print(f"Email: {emails}")
-    
-demo_string_formatting()
-print("\n" + "="*50 + "\n")
-demo_string_methods()
-print("\n" + "="*50 + "\n")
-demo_regex()
-
-### 🧠 Mini Quiz - Chapter 2 (Tips & Trik Python)
-
-1) Apa hasil dari list(map(lambda x: x**2, filter(lambda x: x % 2 == 0, [1,2,3,4])))?
-    a) [1,4,9,16]  b) [4,16]  c) [2,4]  d) [1,9]
-
-2) Fungsi bawaan mana yang menggabungkan dua iterable menjadi pasangan (pair)?
-    a) enumerate  b) zip  c) map  d) filter
-
-3) Pada f-string f"{nilai:.2f}", .2f berarti:
-    a) Lebar 2 karakter  b) 2 angka di depan koma  c) 2 angka di belakang koma  d) Bilangan bulat
-
-Kunci: 1) b, 2) b, 3) c
+**Soal 3:** Hasil dari `[x**2 for x in [1,2,3]]` adalah:
+a) [1,2,3]  b) [1,4,9]  c) [2,4,6]  d) Error
 
 ### 💪 Mini Exercise - Chapter 2
 
-- Tulis fungsi summarize_numbers(angka) yang mengembalikan dict: min, max, mean, even_sq (kuadrat bilangan genap) menggunakan map/filter/reduce.
-- Buat fungsi sanitize_emails(teks) yang mengekstrak semua email valid dengan regex dan mengembalikannya unik (set → list terurut).
-- Implementasikan enumerate_like(iterable, start=1) yang meniru enumerate hanya dengan range dan indexing.
-    # Substitusi
-    clean_text = re.sub(r'\d+', '[NUMBER]', text)
-    print(f"Text with numbers replaced: {clean_text}")
-
-demo_string_formatting()
-print("\n" + "="*50 + "\n")
-demo_string_methods()
-print("\n" + "="*50 + "\n")
-demo_regex()
-```
-
-### 2.4 Error Handling dan Debugging
-
+**Latihan 1:** Buat program manajemen daftar belanja:
 ```python
-# Exception handling yang baik
-def safe_divide(a, b):
-    """Pembagian dengan error handling"""
-    try:
-        result = a / b
-        return result
-    except ZeroDivisionError:
-        print("Error: Tidak bisa membagi dengan nol")
-        return None
-    except TypeError:
-        print("Error: Input harus berupa angka")
-        return None
-    except Exception as e:
-        print(f"Error tidak terduga: {e}")
-        return None
-    finally:
-        print("Operasi pembagian selesai")
-
-# Custom exceptions
-class ValidationError(Exception):
-    """Custom exception untuk validasi"""
-    def __init__(self, message, field=None):
-        self.message = message
-        self.field = field
-        super().__init__(self.message)
-
-def validate_mahasiswa_data(nama, umur, ipk):
-    """Validasi data mahasiswa dengan custom exception"""
-    try:
-        if not nama or len(nama.strip()) == 0:
-            raise ValidationError("Nama tidak boleh kosong", "nama")
-        
-        if not isinstance(umur, int) or umur < 17 or umur > 30:
-            raise ValidationError("Umur harus integer antara 17-30", "umur")
-        
-        if not isinstance(ipk, (int, float)) or ipk < 0 or ipk > 4:
-            raise ValidationError("IPK harus angka antara 0-4", "ipk")
-        
-        return True
-        
-    except ValidationError as e:
-        print(f"Validation Error in {e.field}: {e.message}")
-        return False
-    except Exception as e:
-        print(f"Unexpected error: {e}")
-        return False
-
-# Context manager untuk resource management
-class FileManager:
-    """Context manager untuk file operations"""
-    def __init__(self, filename, mode):
-        self.filename = filename
-        self.mode = mode
-        self.file = None
-    
-    def __enter__(self):
-        print(f"Opening file {self.filename}")
-        self.file = open(self.filename, self.mode)
-        return self.file
-    
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print(f"Closing file {self.filename}")
-        if self.file:
-            self.file.close()
-        if exc_type:
-            print(f"Exception occurred: {exc_val}")
-        return False  # Re-raise exception
-
-# Menggunakan context manager
-def demo_context_manager():
-    """Demo penggunaan context manager"""
-    try:
-        with FileManager("test.txt", "w") as f:
-            f.write("Hello, World!")
-        print("File operation completed successfully")
-    except Exception as e:
-        print(f"Error in file operation: {e}")
-
-# Testing
-print("Testing safe_divide:")
-print(safe_divide(10, 2))
-print(safe_divide(10, 0))
-print(safe_divide("10", 2))
-
-print("\nTesting validation:")
-validate_mahasiswa_data("Ahmad", 25, 3.75)
-validate_mahasiswa_data("", 25, 3.75)
-validate_mahasiswa_data("Ahmad", 35, 3.75)
-
-print("\nTesting context manager:")
-demo_context_manager()
+belanja = []
+# Tambahkan 5 item
+# Hapus 1 item  
+# Tampilkan jumlah item
+# Cek apakah "susu" ada dalam daftar
 ```
+
+**Latihan 2:** Analisis nilai siswa:
+```python
+nilai = [85, 92, 78, 96, 88, 75, 90]
+# Hitung rata-rata
+# Cari nilai tertinggi dan terendah
+# Hitung jumlah siswa yang lulus (>= 80)
+```
+
+**Latihan 3:** List comprehension challenge:
+```python
+angka = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# Buat list bilangan genap saja
+# Buat list kuadrat dari bilangan ganjil
+# Buat list string "genap" atau "ganjil" untuk setiap angka
+```
+
+**Jawaban Mini Quiz:**
+1. b) pisang
+2. b) append()
+3. b) [1,4,9]
 
 ---
 
-## CHAPTER 3: WEB SCRAPING DASAR
+## CHAPTER 3: STRUKTUR DATA - DICTIONARIES
 
-### 3.1 Pengenalan Web Scraping
+### 3.1 Pengenalan Dictionary
 
-Web scraping adalah proses otomatis untuk mengekstrak data dari website. Python menyediakan berbagai library untuk web scraping.
-
-```python
-import requests
-from bs4 import BeautifulSoup
-import json
-import time
-
-# Basic HTTP requests
-def simple_web_request(url):
-    """Melakukan HTTP request sederhana"""
-    try:
-        response = requests.get(url)
-        response.raise_for_status()  # Raise exception untuk status error
-        
-        return {
-            'status_code': response.status_code,
-            'content_type': response.headers.get('content-type'),
-            'content_length': len(response.content),
-            'content': response.text[:500] + "..." if len(response.text) > 500 else response.text
-        }
-    except requests.exceptions.RequestException as e:
-        return {'error': str(e)}
-
-# Web scraping dengan BeautifulSoup
-def scrape_simple_data(url):
-    """Scraping data sederhana dari website"""
-    try:
-        # Headers untuk menghindari blocking
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        }
-        
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Extract basic information
-        title = soup.find('title').text.strip() if soup.find('title') else "No title"
-        
-        # Find all links
-        links = []
-        for link in soup.find_all('a', href=True):
-            links.append({
-                'text': link.text.strip(),
-                'url': link['href']
-            })
-        
-        # Find all paragraphs
-        paragraphs = [p.text.strip() for p in soup.find_all('p') if p.text.strip()]
-        
-        return {
-            'title': title,
-            'links_count': len(links),
-            'links': links[:5],  # First 5 links
-            'paragraphs_count': len(paragraphs),
-            'first_paragraph': paragraphs[0] if paragraphs else "No paragraphs"
-        }
-        
-    except Exception as e:
-        return {'error': str(e)}
-
-# Scraping with rate limiting
-class WebScraper:
-    """Class untuk web scraping dengan rate limiting"""
-    
-    def __init__(self, delay=1):
-        self.delay = delay
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-        })
-    
-    def get_page(self, url):
-        """Get single page with rate limiting"""
-        try:
-            time.sleep(self.delay)  # Rate limiting
-            response = self.session.get(url)
-            response.raise_for_status()
-            return response
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching {url}: {e}")
-            return None
-    
-    def scrape_multiple_pages(self, urls):
-        """Scrape multiple pages with rate limiting"""
-        results = []
-        
-        for i, url in enumerate(urls):
-            print(f"Scraping page {i+1}/{len(urls)}: {url}")
-            
-            response = self.get_page(url)
-            if response:
-                soup = BeautifulSoup(response.content, 'html.parser')
-                title = soup.find('title').text.strip() if soup.find('title') else "No title"
-                
-                results.append({
-                    'url': url,
-                    'title': title,
-                    'status_code': response.status_code
-                })
-            else:
-                results.append({
-                    'url': url,
-                    'title': 'Failed to scrape',
-                    'status_code': None
-                })
-        
-        return results
-
-# API scraping
-def scrape_json_api(api_url):
-    """Scraping data dari JSON API"""
-    try:
-        response = requests.get(api_url)
-        response.raise_for_status()
-        
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        return {'error': f'Request error: {e}'}
-    except json.JSONDecodeError as e:
-        return {'error': f'JSON decode error: {e}'}
-
-# Example usage (commented out to avoid actual web requests in example)
-"""
-# Test simple request
-print("Testing simple web request:")
-result = simple_web_request("https://httpbin.org/html")
-print(json.dumps(result, indent=2))
-
-# Test scraping
-print("\nTesting web scraping:")
-scrape_result = scrape_simple_data("https://httpbin.org/html")
-print(json.dumps(scrape_result, indent=2))
-
-# Test JSON API
-print("\nTesting JSON API:")
-api_result = scrape_json_api("https://jsonplaceholder.typicode.com/posts/1")
-print(json.dumps(api_result, indent=2))
-"""
-```
-
-### 3.2 Web Scraping Best Practices
+Dictionary adalah struktur data key-value yang sangat berguna:
 
 ```python
-import csv
-from urllib.parse import urljoin, urlparse
-from datetime import datetime
+# Membuat dictionary
+mahasiswa = {
+    "nama": "Ahmad Fauzi",
+    "nim": "12345",
+    "jurusan": "Teknik Informatika",
+    "ipk": 3.75
+}
 
-class EthicalWebScraper:
-    """Web scraper dengan praktik ethical scraping"""
-    
-    def __init__(self, delay=1, respect_robots=True):
-        self.delay = delay
-        self.respect_robots = respect_robots
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Educational Web Scraper 1.0'
-        })
-        self.scraped_urls = set()
-    
-    def check_robots_txt(self, base_url):
-        """Check robots.txt for scraping permissions"""
-        if not self.respect_robots:
-            return True
-        
-        try:
-            robots_url = urljoin(base_url, '/robots.txt')
-            response = self.session.get(robots_url)
-            
-            if response.status_code == 200:
-                print(f"Found robots.txt: {robots_url}")
-                print(response.text[:500] + "..." if len(response.text) > 500 else response.text)
-                return True
-            else:
-                print(f"No robots.txt found at {robots_url}")
-                return True
-        except:
-            print("Could not check robots.txt")
-            return True
-    
-    def scrape_with_metadata(self, url):
-        """Scrape page with metadata collection"""
-        if url in self.scraped_urls:
-            print(f"URL already scraped: {url}")
-            return None
-        
-        try:
-            time.sleep(self.delay)
-            response = self.session.get(url)
-            response.raise_for_status()
-            
-            soup = BeautifulSoup(response.content, 'html.parser')
-            
-            # Extract metadata
-            metadata = {
-                'url': url,
-                'scraped_at': datetime.now().isoformat(),
-                'status_code': response.status_code,
-                'content_type': response.headers.get('content-type'),
-                'title': soup.find('title').text.strip() if soup.find('title') else None,
-                'meta_description': None,
-                'h1_tags': [h1.text.strip() for h1 in soup.find_all('h1')],
-                'links_count': len(soup.find_all('a')),
-                'images_count': len(soup.find_all('img')),
-                'word_count': len(soup.get_text().split())
-            }
-            
-            # Extract meta description
-            meta_desc = soup.find('meta', attrs={'name': 'description'})
-            if meta_desc:
-                metadata['meta_description'] = meta_desc.get('content')
-            
-            self.scraped_urls.add(url)
-            return metadata
-            
-        except Exception as e:
-            return {
-                'url': url,
-                'error': str(e),
-                'scraped_at': datetime.now().isoformat()
-            }
-    
-    def save_to_csv(self, data, filename):
-        """Save scraped data to CSV file"""
-        if not data:
-            print("No data to save")
-            return
-        
-        try:
-            with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-                fieldnames = data[0].keys()
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                
-                writer.writeheader()
-                for row in data:
-                    writer.writerow(row)
-                
-                print(f"Data saved to {filename}")
-        except Exception as e:
-            print(f"Error saving to CSV: {e}")
+# Dictionary kosong
+data = {}
+info = dict()
 
-# Data extraction utilities
-def extract_table_data(soup, table_selector='table'):
-    """Extract data from HTML tables"""
-    tables = soup.select(table_selector)
-    table_data = []
-    
-    for table in tables:
-        rows = table.find_all('tr')
-        if not rows:
-            continue
-        
-        # Get headers
-        headers = [th.text.strip() for th in rows[0].find_all(['th', 'td'])]
-        
-        # Get data rows
-        for row in rows[1:]:
-            cells = [td.text.strip() for td in row.find_all(['td', 'th'])]
-            if len(cells) == len(headers):
-                table_data.append(dict(zip(headers, cells)))
-    
-    return table_data
-
-def extract_form_data(soup):
-    """Extract form information"""
-    forms = soup.find_all('form')
-    form_data = []
-    
-    for form in forms:
-        form_info = {
-            'action': form.get('action', ''),
-            'method': form.get('method', 'GET'),
-            'inputs': []
-        }
-        
-        inputs = form.find_all(['input', 'textarea', 'select'])
-        for inp in inputs:
-            input_info = {
-                'name': inp.get('name', ''),
-                'type': inp.get('type', 'text'),
-                'required': inp.has_attr('required')
-            }
-            form_info['inputs'].append(input_info)
-        
-        form_data.append(form_info)
-    
-    return form_data
-
-# Example comprehensive scraper
-def comprehensive_page_analysis(url):
-    """Comprehensive analysis of a web page"""
-    scraper = EthicalWebScraper(delay=1)
-    
-    # Check robots.txt
-    base_url = f"{urlparse(url).scheme}://{urlparse(url).netloc}"
-    scraper.check_robots_txt(base_url)
-    
-    # Scrape page
-    metadata = scraper.scrape_with_metadata(url)
-    if not metadata or 'error' in metadata:
-        print(f"Failed to scrape: {metadata.get('error', 'Unknown error')}")
-        return None
-    
-    # Get page for detailed analysis
-    try:
-        response = scraper.session.get(url)
-        soup = BeautifulSoup(response.content, 'html.parser')
-        
-        # Extract additional data
-        analysis = metadata.copy()
-        analysis.update({
-            'table_data': extract_table_data(soup),
-            'forms': extract_form_data(soup),
-            'external_links': [
-                link.get('href') for link in soup.find_all('a', href=True)
-                if link.get('href').startswith(('http:', 'https:'))
-            ][:10]  # First 10 external links
-        })
-        
-        return analysis
-        
-    except Exception as e:
-        print(f"Error in comprehensive analysis: {e}")
-          return metadata
+print(f"Data mahasiswa: {mahasiswa}")
+print(f"Nama: {mahasiswa['nama']}")
 ```
 
-### 🧠 Mini Quiz - Chapter 3 (Web Scraping Dasar)
+### 3.2 Mengakses dan Memodifikasi Dictionary
 
-1) Header User-Agent digunakan untuk:
-    a) Mengatur timeout  b) Meniru identitas browser  c) Menghindari rate limit  d) Parsing HTML
+```python
+produk = {
+    "nama": "Laptop Gaming",
+    "harga": 15000000,
+    "brand": "ASUS",
+    "stok": 5
+}
 
-2) Metode yang tepat untuk mencegah server overload saat scraping:
-    a) Mengirim request secara paralel maksimal 1000 req/detik
-    b) Mengabaikan robots.txt
-    c) Menggunakan delay antar request dan caching
-    d) Menonaktifkan SSL verification
+# Akses nilai
+print(f"Harga: Rp {produk['harga']:,}")
+print(f"Brand: {produk.get('brand', 'Unknown')}")
 
-3) Fungsi BeautifulSoup.find_all('a', href=True) mengembalikan:
-    a) Satu tag pertama  b) Semua tag a yang memiliki atribut href  c) Semua link eksternal  d) Dict href→text
+# Menambah/mengubah
+produk["kategori"] = "Elektronik"
+produk["harga"] = 14500000  # Update harga
 
-Kunci: 1) b, 2) c, 3) b
+# Menghapus
+del produk["stok"]
+removed = produk.pop("kategori", "Tidak ada")
+
+print(f"Produk: {produk}")
+```
+
+### 3.3 Operasi Dictionary Lanjutan
+
+```python
+inventory = {
+    "laptop": 10,
+    "mouse": 25,
+    "keyboard": 15,
+    "monitor": 8
+}
+
+# Iterasi
+print("=== Inventory ===")
+for item, jumlah in inventory.items():
+    print(f"{item.capitalize()}: {jumlah} unit")
+
+# Keys dan values
+print(f"Items: {list(inventory.keys())}")
+print(f"Quantities: {list(inventory.values())}")
+
+# Merge dictionaries
+inventory_tambahan = {"webcam": 12, "speaker": 20}
+inventory.update(inventory_tambahan)
+
+print(f"Inventory lengkap: {inventory}")
+```
+
+### 3.4 Dictionary Comprehension
+
+```python
+# Dictionary comprehension
+angka = [1, 2, 3, 4, 5]
+
+# Angka dan kuadratnya
+kuadrat_dict = {x: x**2 for x in angka}
+print(f"Kuadrat: {kuadrat_dict}")
+
+# Dengan kondisi
+genap_kuadrat = {x: x**2 for x in angka if x % 2 == 0}
+print(f"Kuadrat genap: {genap_kuadrat}")
+
+# Dari list ke dictionary
+nama_list = ["Ahmad", "Budi", "Citra"]
+panjang_nama = {nama: len(nama) for nama in nama_list}
+print(f"Panjang nama: {panjang_nama}")
+
+# Nested dictionary
+mahasiswa_data = {
+    f"mhs_{i}": {"nama": f"Mahasiswa {i}", "nilai": i * 20}
+    for i in range(1, 6)
+}
+print(f"Data mahasiswa: {mahasiswa_data}")
+```
+
+### 🧠 Mini Quiz - Chapter 3
+
+**Soal 1:** Bagaimana cara mengakses nilai dengan key "nama" dari dict `data`?
+a) data.nama  b) data["nama"]  c) data(nama)  d) data->nama
+
+**Soal 2:** Method apa yang mengembalikan semua keys dari dictionary?
+a) keys()  b) getkeys()  c) allkeys()  d) listkeys()
+
+**Soal 3:** Apa yang terjadi jika mengakses key yang tidak ada tanpa default?
+a) Mengembalikan None  b) Mengembalikan ""  c) KeyError  d) Mengembalikan 0
 
 ### 💪 Mini Exercise - Chapter 3
 
-- Buat fungsi get_all_links(url) yang mengembalikan daftar URL absolut dan unik dari halaman.
-- Buat crawler sederhana crawl(start_url, depth=1) yang menghormati robots.txt dan max 1 req/detik.
-- Parselah tabel HTML pertama pada suatu halaman menjadi list of dicts.
+**Latihan 1:** Sistem informasi mahasiswa:
+```python
+mahasiswa = {
+    "nama": "Andi",
+    "nim": "12345",
+    "jurusan": "Informatika",
+    "ipk": 3.75
+}
+# Tambahkan field "semester"
+# Ubah IPK menjadi 3.80
+# Tampilkan semua informasi
+```
+
+**Latihan 2:** Kamus Bahasa Inggris-Indonesia:
+```python
+kamus = {
+    "hello": "halo",
+    "world": "dunia", 
+    "python": "python"
+}
+# Tambahkan 3 kata baru
+# Buat function untuk translate
+# Test dengan beberapa kata
+```
+
+**Latihan 3:** Analisis data penjualan:
+```python
+penjualan = {
+    "januari": 1500000,
+    "februari": 1800000,
+    "maret": 1650000
+}
+# Hitung total penjualan
+# Cari bulan dengan penjualan tertinggi
+# Hitung rata-rata penjualan
+```
+
+**Jawaban Mini Quiz:**
+1. b) data["nama"]
+2. a) keys()
+3. c) KeyError
 
 ---
 
-## CHAPTER 4: WORKING WITH FILES (LANJUTAN)
+## CHAPTER 4: STRUKTUR DATA - TUPLES
 
-### 4.1 File Formats Khusus
+### 4.1 Pengenalan Tuple
+
+Tuple adalah struktur data yang immutable (tidak bisa diubah):
 
 ```python
-import json
-import xml.etree.ElementTree as ET
-import configparser
-from datetime import datetime
+# Membuat tuple
+koordinat = (3, 4)
+warna_rgb = (255, 128, 0)
+data_siswa = ("Ahmad", 17, "XII-A", True)
 
-# JSON file operations
-class JSONManager:
-    """Manager untuk operasi file JSON"""
-    
-    @staticmethod
-    def save_to_json(data, filename, indent=2):
-        """Menyimpan data ke file JSON"""
-        try:
-            with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=indent, ensure_ascii=False, default=str)
-            return f"Data berhasil disimpan ke {filename}"
-        except Exception as e:
-            return f"Error menyimpan JSON: {e}"
-    
-    @staticmethod
-    def load_from_json(filename):
-        """Membaca data dari file JSON"""
-        try:
-            with open(filename, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except FileNotFoundError:
-            return {"error": "File tidak ditemukan"}
-        except json.JSONDecodeError as e:
-            return {"error": f"Error parsing JSON: {e}"}
-        except Exception as e:
-            return {"error": f"Error membaca JSON: {e}"}
-    
-    @staticmethod
-    def update_json(filename, updates):
-        """Update data dalam file JSON"""
-        data = JSONManager.load_from_json(filename)
-        if "error" in data:
-            return data["error"]
-        
-        data.update(updates)
-        return JSONManager.save_to_json(data, filename)
+# Tuple dengan satu elemen (perlu koma)
+single_tuple = (42,)
+not_tuple = (42)  # Ini integer, bukan tuple
 
-# XML file operations
-class XMLManager:
-    """Manager untuk operasi file XML"""
-    
-    @staticmethod
-    def create_xml_from_dict(data, root_name="root"):
-        """Membuat XML dari dictionary"""
-        root = ET.Element(root_name)
-        
-        def dict_to_xml(parent, data):
-            if isinstance(data, dict):
-                for key, value in data.items():
-                    child = ET.SubElement(parent, key)
-                    dict_to_xml(child, value)
-            elif isinstance(data, list):
-                for item in data:
-                    child = ET.SubElement(parent, "item")
-                    dict_to_xml(child, item)
-            else:
-                parent.text = str(data)
-        
-        dict_to_xml(root, data)
-        return ET.ElementTree(root)
-    
-    @staticmethod
-    def save_xml(xml_tree, filename):
-        """Menyimpan XML tree ke file"""
-        try:
-            xml_tree.write(filename, encoding='utf-8', xml_declaration=True)
-            return f"XML berhasil disimpan ke {filename}"
-        except Exception as e:
-            return f"Error menyimpan XML: {e}"
-    
-    @staticmethod
-    def load_xml(filename):
-        """Membaca file XML"""
-        try:
-            tree = ET.parse(filename)
-            root = tree.getroot()
-            
-            def xml_to_dict(element):
-                result = {}
-                if element.text and element.text.strip():
-                    result['text'] = element.text.strip()
-                
-                for child in element:
-                    if child.tag in result:
-                        if not isinstance(result[child.tag], list):
-                            result[child.tag] = [result[child.tag]]
-                        result[child.tag].append(xml_to_dict(child))
-                    else:
-                        result[child.tag] = xml_to_dict(child)
-                
-                return result
-            
-            return {root.tag: xml_to_dict(root)}
-        except Exception as e:
-            return {"error": f"Error membaca XML: {e}"}
-
-# Configuration file operations
-class ConfigManager:
-    """Manager untuk file konfigurasi"""
-    
-    def __init__(self, config_file):
-        self.config_file = config_file
-        self.config = configparser.ConfigParser()
-    
-    def create_default_config(self):
-        """Membuat file konfigurasi default"""
-        self.config['DATABASE'] = {
-            'host': 'localhost',
-            'port': '5432',
-            'name': 'myapp',
-            'user': 'admin'
-        }
-        
-        self.config['APP'] = {
-            'debug': 'True',
-            'log_level': 'INFO',
-            'max_connections': '100'
-        }
-        
-        return self.save_config()
-    
-    def load_config(self):
-        """Memuat file konfigurasi"""
-        try:
-            self.config.read(self.config_file)
-            return True
-        except Exception as e:
-            print(f"Error membaca config: {e}")
-            return False
-    
-    def save_config(self):
-        """Menyimpan file konfigurasi"""
-        try:
-            with open(self.config_file, 'w') as f:
-                self.config.write(f)
-            return f"Config berhasil disimpan ke {self.config_file}"
-        except Exception as e:
-            return f"Error menyimpan config: {e}"
-    
-    def get_value(self, section, key, fallback=None):
-        """Mendapatkan nilai konfigurasi"""
-        return self.config.get(section, key, fallback=fallback)
-    
-    def set_value(self, section, key, value):
-        """Mengatur nilai konfigurasi"""
-        if not self.config.has_section(section):
-            self.config.add_section(section)
-        self.config.set(section, key, str(value))
-    
-    def get_all_config(self):
-        """Mendapatkan semua konfigurasi sebagai dictionary"""
-        config_dict = {}
-        for section in self.config.sections():
-            config_dict[section] = dict(self.config.items(section))
-        return config_dict
-
-# Example usage
-def demo_file_formats():
-    """Demonstrasi berbagai format file"""
-    
-    # Sample data
-    sample_data = {
-        "mahasiswa": [
-            {"nama": "Ahmad", "nim": "12345", "ipk": 3.75},
-            {"nama": "Siti", "nim": "67890", "ipk": 3.90}
-        ],
-        "metadata": {
-            "created": datetime.now().isoformat(),
-            "version": "1.0"
-        }
-    }
-    
-    # JSON operations
-    print("=== JSON Operations ===")
-    print(JSONManager.save_to_json(sample_data, "data.json"))
-    loaded_json = JSONManager.load_from_json("data.json")
-    print("Loaded JSON:", loaded_json)
-    
-    # XML operations
-    print("\n=== XML Operations ===")
-    xml_tree = XMLManager.create_xml_from_dict(sample_data, "university_data")
-    print(XMLManager.save_xml(xml_tree, "data.xml"))
-    loaded_xml = XMLManager.load_xml("data.xml")
-    print("Loaded XML:", loaded_xml)
-    
-    # Config operations
-    print("\n=== Config Operations ===")
-    config_manager = ConfigManager("app.cfg")
-    print(config_manager.create_default_config())
-    
-    config_manager.load_config()
-    print("Database host:", config_manager.get_value('DATABASE', 'host'))
-    
-    config_manager.set_value('DATABASE', 'host', '192.168.1.100')
-    print(config_manager.save_config())
-    
-    print("All config:", config_manager.get_all_config())
-
-# Log file manager
-class LogManager:
-    """Manager untuk file log"""
-    
-    def __init__(self, log_file, max_size_mb=10):
-        self.log_file = log_file
-        self.max_size = max_size_mb * 1024 * 1024  # Convert to bytes
-    
-    def write_log(self, message, level="INFO"):
-        """Menulis log dengan timestamp"""
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        log_entry = f"[{timestamp}] [{level}] {message}\n"
-        
-        try:
-            # Check file size before writing
-            if os.path.exists(self.log_file):
-                if os.path.getsize(self.log_file) > self.max_size:
-                    self._rotate_log()
-            
-            with open(self.log_file, 'a', encoding='utf-8') as f:
-                f.write(log_entry)
-            return True
-        except Exception as e:
-            print(f"Error writing log: {e}")
-            return False
-    
-    def _rotate_log(self):
-        """Rotate log file when it gets too large"""
-        try:
-            backup_file = f"{self.log_file}.{int(time.time())}"
-            os.rename(self.log_file, backup_file)
-            print(f"Log rotated to {backup_file}")
-        except Exception as e:
-            print(f"Error rotating log: {e}")
-    
-    def read_logs(self, lines=50):
-        """Membaca n baris terakhir dari log"""
-        try:
-            with open(self.log_file, 'r', encoding='utf-8') as f:
-                all_lines = f.readlines()
-                return all_lines[-lines:] if len(all_lines) > lines else all_lines
-        except Exception as e:
-            return [f"Error reading logs: {e}"]
-
-# Example log usage
-def demo_logging():
-    """Demo sistem logging"""
-    logger = LogManager("app.log")
-    
-    logger.write_log("Aplikasi dimulai", "INFO")
-    logger.write_log("User login: admin", "INFO")
-    logger.write_log("Database connection failed", "ERROR")
-    logger.write_log("Mencoba reconnect database", "WARNING")
-    logger.write_log("Database connected", "INFO")
-    
-    print("Recent logs:")
-    recent_logs = logger.read_logs(5)
-    for log_line in recent_logs:
-        print(log_line.strip())
-
-demo_file_formats()
-print("\n" + "="*50 + "\n")
-demo_logging()
+print(f"Koordinat: {koordinat}")
+print(f"Type: {type(koordinat)}")
+print(f"Single tuple: {single_tuple}, Type: {type(single_tuple)}")
 ```
 
-### 🧠 Mini Quiz - Chapter 4 (Working with Files Lanjutan)
+### 4.2 Operasi pada Tuple
 
-1) json.dump(data, f, ensure_ascii=False) berguna untuk:
-    a) Mengkompres file  b) Menyimpan karakter non-ASCII dengan benar  c) Meningkatkan kecepatan write  d) Menghindari BOM
+```python
+point = (10, 20, 30)
 
-2) Pada XML, elemen baru dibuat dengan:
-    a) ET.Parse  b) ET.SubElement  c) ET.Tree  d) ET.Attrib
+# Akses elemen (sama seperti list)
+print(f"X: {point[0]}, Y: {point[1]}, Z: {point[2]}")
 
-3) configparser cocok untuk menyimpan:
-    a) Data tabel besar  b) Binary blobs  c) Konfigurasi key-value per section  d) Gambar
+# Slicing
+print(f"XY: {point[:2]}")
+print(f"YZ: {point[1:]}")
 
-Kunci: 1) b, 2) b, 3) c
+# Tuple methods (terbatas)
+angka_tuple = (1, 2, 3, 2, 4, 2, 5)
+print(f"Count of 2: {angka_tuple.count(2)}")
+print(f"Index of 3: {angka_tuple.index(3)}")
+
+# Panjang tuple
+print(f"Length: {len(point)}")
+```
+
+### 4.3 Unpacking Tuple
+
+```python
+# Tuple unpacking
+person = ("Alice", 25, "Engineer")
+nama, umur, pekerjaan = person
+
+print(f"Nama: {nama}")
+print(f"Umur: {umur}")
+print(f"Pekerjaan: {pekerjaan}")
+
+# Swap variables menggunakan tuple
+a = 10
+b = 20
+print(f"Sebelum: a={a}, b={b}")
+
+a, b = b, a  # Swap
+print(f"Sesudah: a={a}, b={b}")
+
+# Multiple return values
+def get_name_age():
+    return "Bob", 30
+
+nama, umur = get_name_age()
+print(f"Dari function: {nama}, {umur}")
+```
+
+### 4.4 Tuple sebagai Key Dictionary
+
+```python
+# Tuple bisa digunakan sebagai key (karena immutable)
+lokasi_suhu = {
+    (0, 0): 25.5,
+    (10, 10): 23.2,
+    (20, 20): 27.8
+}
+
+print("=== Data Suhu Berdasarkan Koordinat ===")
+for koordinat, suhu in lokasi_suhu.items():
+    x, y = koordinat
+    print(f"Lokasi ({x}, {y}): {suhu}°C")
+
+# Menambah data baru
+lokasi_suhu[(5, 5)] = 24.1
+lokasi_suhu[(15, 15)] = 26.3
+
+# Tidak bisa pakai list sebagai key (error)
+# data = {[1, 2]: "value"}  # TypeError!
+```
+
+### 🧠 Mini Quiz - Chapter 4
+
+**Soal 1:** Perbedaan utama tuple dengan list adalah:
+a) Tuple bisa diubah  b) Tuple tidak bisa diubah  c) Tuple hanya untuk angka  d) Tidak ada perbedaan
+
+**Soal 2:** Bagaimana cara membuat tuple dengan satu elemen?
+a) (5)  b) (5,)  c) [5]  d) {5}
+
+**Soal 3:** Operasi apa yang TIDAK bisa dilakukan pada tuple?
+a) Indexing  b) Slicing  c) append()  d) len()
 
 ### 💪 Mini Exercise - Chapter 4
 
-- Simpan hasil analisis penjualan (dict kompleks) ke JSON lalu baca kembali dan update satu field.
-- Konversi dict bersarang ke XML dan simpan, lalu parse kembali menjadi dict.
-- Buat config.ini dengan 2 section (database, app), lalu tulis dan baca konfigurasi menggunakan configparser.
+**Latihan 1:** Koordinat dan jarak:
+```python
+# Buat tuple untuk menyimpan koordinat (x, y)
+titik_a = (3, 4)
+titik_b = (6, 8)
+# Hitung jarak antara kedua titik
+# Tampilkan koordinat dengan format yang rapi
+```
 
- 
+**Latihan 2:** Data RGB warna:
+```python
+warna = {
+    "merah": (255, 0, 0),
+    "hijau": (0, 255, 0),
+    "biru": (0, 0, 255)
+}
+# Tambahkan warna "kuning", "ungu", "orange"
+# Buat function untuk mengecek apakah warna valid (0-255)
+```
+
+**Latihan 3:** Unpacking dan packing:
+```python
+data_siswa = ("Ahmad", 16, "X-1", 85.5)
+# Unpack ke variabel terpisah
+# Buat tuple baru dengan menambah informasi "hobi"
+# Gunakan tuple sebagai return value dari function
+```
+
+**Jawaban Mini Quiz:**
+1. b) Tuple tidak bisa diubah
+2. b) (5,)
+3. c) append()
+
+---
+
+## CHAPTER 5: KOMBINASI STRUKTUR DATA
+
+### 5.1 Nested Structures
+
+```python
+# List of dictionaries
+mahasiswa = [
+    {"nama": "Ahmad", "nilai": 85, "mata_kuliah": ["Python", "Java"]},
+    {"nama": "Budi", "nilai": 90, "mata_kuliah": ["Python", "C++"]},
+    {"nama": "Citra", "nilai": 78, "mata_kuliah": ["Java", "JavaScript"]}
+]
+
+print("=== Data Mahasiswa ===")
+for mhs in mahasiswa:
+    print(f"{mhs['nama']}: {mhs['nilai']} - {', '.join(mhs['mata_kuliah'])}")
+
+# Dictionary of lists
+nilai_per_mata_kuliah = {
+    "Python": [85, 90, 78, 92],
+    "Java": [88, 76, 85, 89],
+    "C++": [82, 95, 71, 87]
+}
+
+for mk, nilai_list in nilai_per_mata_kuliah.items():
+    rata_rata = sum(nilai_list) / len(nilai_list)
+    print(f"{mk}: rata-rata {rata_rata:.1f}")
+```
+
+### 5.2 Practical Examples
+
+```python
+# Sistem manajemen inventori
+inventori = {
+    "laptop": {
+        "stok": 15,
+        "harga": 12000000,
+        "kategori": "elektronik",
+        "supplier": ["PT A", "PT B"]
+    },
+    "mouse": {
+        "stok": 50,
+        "harga": 150000,
+        "kategori": "aksesoris",
+        "supplier": ["PT C"]
+    }
+}
+
+def tampilkan_inventori(data):
+    """Menampilkan inventori dengan format rapi"""
+    print("=== INVENTORI TOKO ===")
+    total_nilai = 0
+    
+    for produk, info in data.items():
+        nilai_stok = info["stok"] * info["harga"]
+        total_nilai += nilai_stok
+        
+        print(f"\n{produk.upper()}:")
+        print(f"  Stok: {info['stok']} unit")
+        print(f"  Harga: Rp {info['harga']:,}")
+        print(f"  Nilai total: Rp {nilai_stok:,}")
+        print(f"  Supplier: {', '.join(info['supplier'])}")
+    
+    print(f"\nTOTAL NILAI INVENTORI: Rp {total_nilai:,}")
+
+tampilkan_inventori(inventori)
+```
+
+### 5.3 Data Processing dengan Struktur Gabungan
+
+```python
+# Dataset penjualan
+penjualan_data = [
+    {"tanggal": "2024-01-01", "produk": "laptop", "jumlah": 2, "harga": 12000000},
+    {"tanggal": "2024-01-01", "produk": "mouse", "jumlah": 5, "harga": 150000},
+    {"tanggal": "2024-01-02", "produk": "laptop", "jumlah": 1, "harga": 12000000},
+    {"tanggal": "2024-01-02", "produk": "keyboard", "jumlah": 3, "harga": 500000},
+]
+
+def analisis_penjualan(data):
+    """Analisis data penjualan"""
+    # Group by produk
+    penjualan_per_produk = {}
+    total_pendapatan = 0
+    
+    for transaksi in data:
+        produk = transaksi["produk"]
+        jumlah = transaksi["jumlah"]
+        harga = transaksi["harga"]
+        pendapatan = jumlah * harga
+        
+        if produk not in penjualan_per_produk:
+            penjualan_per_produk[produk] = {
+                "total_unit": 0,
+                "total_pendapatan": 0
+            }
+        
+        penjualan_per_produk[produk]["total_unit"] += jumlah
+        penjualan_per_produk[produk]["total_pendapatan"] += pendapatan
+        total_pendapatan += pendapatan
+    
+    # Tampilkan hasil
+    print("=== ANALISIS PENJUALAN ===")
+    for produk, data in penjualan_per_produk.items():
+        print(f"{produk.capitalize()}:")
+        print(f"  Total unit terjual: {data['total_unit']}")
+        print(f"  Total pendapatan: Rp {data['total_pendapatan']:,}")
+    
+    print(f"\nTOTAL PENDAPATAN: Rp {total_pendapatan:,}")
+    
+    # Produk terlaris
+    terlaris = max(penjualan_per_produk.items(), 
+                   key=lambda x: x[1]['total_unit'])
+    print(f"PRODUK TERLARIS: {terlaris[0].capitalize()} ({terlaris[1]['total_unit']} unit)")
+
+analisis_penjualan(penjualan_data)
+```
+
+### 🧠 Mini Quiz - Chapter 5
+
+**Soal 1:** Bagaimana cara mengakses elemen kedua dari list pertama dalam nested structure `data = [[1,2,3], [4,5,6]]`?
+a) data[0][1]  b) data[1][0]  c) data[0,1]  d) data.get(0,1)
+
+**Soal 2:** Struktur data apa yang paling cocok untuk menyimpan informasi mahasiswa dengan berbagai atribut?
+a) List  b) Tuple  c) Dictionary  d) Set
+
+**Soal 3:** Dalam list of dictionaries, bagaimana cara mencari semua item dengan kondisi tertentu?
+a) Menggunakan for loop  b) List comprehension  c) Filter function  d) Semua benar
+
+### 💪 Mini Exercise - Chapter 5
+
+**Latihan 1:** Sistem nilai mahasiswa:
+```python
+# Buat struktur data untuk menyimpan:
+# - Nama mahasiswa
+# - Mata kuliah yang diambil
+# - Nilai per mata kuliah
+# Hitung IPK masing-masing mahasiswa
+```
+
+**Latihan 2:** Analisis data cuaca:
+```python
+cuaca_data = [
+    {"tanggal": "2024-01-01", "suhu": 28, "kelembaban": 80, "hujan": False},
+    {"tanggal": "2024-01-02", "suhu": 30, "kelembaban": 75, "hujan": True},
+    # tambahkan data lebih banyak
+]
+# Hitung rata-rata suhu
+# Hitung jumlah hari hujan
+# Cari hari dengan suhu tertinggi
+```
+
+**Jawaban Mini Quiz:**
+1. a) data[0][1]
+2. c) Dictionary
+3. d) Semua benar
+
+---
 
 ## LATIHAN DAN QUIZ
 
 ### Quiz Pilihan Ganda
 
-1. Manakah cara yang paling aman untuk membuka file di Python?
-   a) `file = open("data.txt")`
-   b) `with open("data.txt") as file:`
-   c) `file = open("data.txt"); file.close()`
-   d) `file = open("data.txt", "r")`
+1. Manakah yang bukan tipe data primitif di Python?
+   a) int  b) str  c) list  d) bool
 
-2. Apa fungsi dari `robots.txt` dalam web scraping?
-   a) Menyimpan data yang di-scrape
-   b) Memberitahu bot/crawler apa yang boleh dan tidak boleh di-scrape
-   c) Mempercepat proses scraping
-   d) Mengamankan website dari scraping
+2. Apa output dari: `print(type(5/2))`?
+   a) <class 'int'>  b) <class 'float'>  c) <class 'str'>  d) Error
 
-3. Mode file manakah yang digunakan untuk menambah konten ke akhir file tanpa menghapus yang sudah ada?
-   a) `w`
-   b) `r`
-   c) `a`
-   d) `x`
+3. Bagaimana cara menambah elemen ke akhir list?
+   a) list.add()  b) list.append()  c) list.push()  d) list.insert()
 
-4. Dalam exception handling, kapan blok `finally` dieksekusi?
-   a) Hanya jika ada exception
-   b) Hanya jika tidak ada exception
-   c) Selalu, terlepas dari ada atau tidaknya exception
-   d) Hanya jika ada return statement
+4. Method apa yang mengembalikan keys dari dictionary?
+   a) getkeys()  b) keys()  c) allkeys()  d) listkeys()
 
-5. Library Python manakah yang paling populer untuk parsing HTML dalam web scraping?
-   a) requests
-   b) urllib
-   c) BeautifulSoup
-   d) json
+5. Perbedaan utama tuple dan list adalah:
+   a) Tuple lebih cepat  b) Tuple immutable  c) Tuple hanya angka  d) Tidak ada bedanya
 
-### Latihan Pemrograman
+### Latihan Praktik
 
-#### Latihan 1: File Manager System
-Buatlah sistem manajemen file dengan fitur:
-- Baca, tulis, dan hapus file
-- Backup file otomatis
-- Logging semua operasi file
-- Validasi ekstensi file
+**Latihan 1: Program Biodata**
+Buat program yang meminta input biodata lengkap dan simpan dalam dictionary.
 
-```python
-class FileManager:
-    def __init__(self, base_dir="files"):
-        # Implementasikan inisialisasi
-        pass
-    
-    def create_file(self, filename, content):
-        # Implementasikan pembuatan file
-        pass
-    
-    def read_file(self, filename):
-        # Implementasikan pembacaan file
-        pass
-    
-    def backup_file(self, filename):
-        # Implementasikan backup file
-        pass
-    
-    def delete_file(self, filename):
-        # Implementasikan penghapusan file
-        pass
-```
+**Latihan 2: Analisis Data Siswa**
+Buat program untuk mengelola data nilai siswa dengan berbagai mata pelajaran.
 
-#### Latihan 2: Web Scraper untuk Berita
-Buatlah web scraper sederhana untuk mengambil:
-- Judul berita
-- Tanggal publikasi
-- Ringkasan berita
-- URL sumber
+**Latihan 3: Sistem Inventori Sederhana**
+Buat program inventori toko menggunakan kombinasi struktur data.
 
-Dengan fitur:
-- Rate limiting (delay antar request)
-- Error handling
-- Export ke CSV/JSON
-
-#### Latihan 3: Configuration Manager
-Buatlah sistem manajemen konfigurasi yang dapat:
-- Membaca/menulis file .ini, .json, dan .yaml
-- Validasi nilai konfigurasi
-- Default values
-- Environment variable support
-
-#### Latihan 4: Log Analyzer
-Buatlah program untuk menganalisis file log dengan fitur:
-- Parse berbagai format log
-- Filter berdasarkan level (INFO, WARNING, ERROR)
-- Statistik (jumlah error per hari, dll)
-- Export laporan
-
-### Proyek Akhir Modul
-
-**Sistem Monitoring Website dan Data Collector**
-
-Buatlah aplikasi yang menggabungkan semua konsep yang telah dipelajari:
-
-1. **Web Monitoring:**
-   - Monitor status website (up/down)
-   - Scraping data tertentu dari website
-   - Alert jika ada perubahan
-
-2. **Data Management:**
-   - Simpan data dalam berbagai format (JSON, CSV, XML)
-   - Backup data otomatis
-   - Kompresi file lama
-
-3. **Configuration:**
-   - File konfigurasi untuk setting monitor
-   - Schedule monitoring
-   - Email notifications
-
-4. **Reporting:**
-   - Generate laporan monitoring
-   - Dashboard sederhana
-   - Export data
-
-**Kriteria Penilaian:**
-- Arsitektur modular dan clean code (25%)
-- File I/O dan data management (25%)
-- Web scraping dan error handling (25%)
-- Documentation dan testing (25%)
+### Kunci Jawaban Quiz
+1. c) list
+2. b) <class 'float'>
+3. b) list.append()
+4. b) keys()
+5. b) Tuple immutable
 
 ---
 
-## EVALUASI PEMBELAJARAN
+## RANGKUMAN MODUL 1
 
-### Rubrik Penilaian
+Dalam modul ini kita telah mempelajari:
 
-| Aspek | Sangat Baik (4) | Baik (3) | Cukup (2) | Kurang (1) |
-|-------|-----------------|----------|-----------|------------|
-| **File Management** | Menguasai berbagai operasi file dan format | Dapat melakukan operasi file dasar | Memahami konsep file I/O | Kesulitan dengan operasi file |
-| **Error Handling** | Implementasi comprehensive exception handling | Good error handling practices | Basic try-catch implementation | Minimal error handling |
-| **Code Organization** | Modular, reusable, dan well-structured | Good code organization | Adequate structure | Poor organization |
-| **Documentation** | Excellent documentation dan comments | Good documentation | Basic documentation | Little to no documentation |
+### Konsep Utama:
+1. **Tipe Data Dasar**: int, float, string, boolean
+2. **List**: Struktur data berurutan yang mutable
+3. **Dictionary**: Struktur data key-value
+4. **Tuple**: Struktur data immutable
+5. **Kombinasi Struktur**: Nested data structures
 
-### Self-Assessment Checklist
+### Skill yang Dikuasai:
+- Manipulasi berbagai tipe data
+- Operasi pada list, dictionary, dan tuple
+- List/Dictionary comprehension
+- Bekerja dengan nested structures
+- Problem solving dengan struktur data yang tepat
 
-Setelah menyelesaikan modul ini, pastikan Anda dapat:
-
-- [ ] Membaca dan menulis berbagai format file (text, JSON, CSV, XML)
-- [ ] Menggunakan context manager untuk file operations
-- [ ] Membuat dan menggunakan custom exceptions
-- [ ] Mengimplementasikan web scraping yang ethical
-- [ ] Menggunakan requests dan BeautifulSoup
-- [ ] Mengelola konfigurasi aplikasi
-- [ ] Membuat sistem logging
-- [ ] Mengorganisir kode dalam modul dan package
-- [ ] Menerapkan best practices dalam Python programming
-
----
-
-## REFERENSI DAN SUMBER BELAJAR
-
-### Referensi Utama
-1. Python Software Foundation. (2024). Python File I/O Documentation
-2. Python Software Foundation. (2024). Python Modules and Packages
-3. Requests Documentation. (2024). HTTP for Humans
-4. Beautiful Soup Documentation. (2024). HTML/XML Parser
-
-### Sumber Belajar Tambahan
-1. Real Python - Working with Files in Python
-2. Real Python - Web Scraping with Python
-3. Automate the Boring Stuff with Python - File I/O
-4. Python Module of the Week (PyMOTW)
-
-### Tools dan Libraries
-- requests: HTTP library
-- BeautifulSoup4: HTML/XML parser
-- configparser: Configuration file parser
-- pathlib: Object-oriented filesystem paths
-- json: JSON encoder/decoder
-
----
-
-*Modul ini disusun sebagai bagian dari pembelajaran Python untuk mahasiswa Teknik Informatika. Fokus pada aplikasi praktis dan real-world scenarios.*
+### Persiapan untuk Modul 2:
+Modul berikutnya akan membahas functions, control flow, dan I/O operations yang akan memanfaatkan pemahaman struktur data dari modul ini.
