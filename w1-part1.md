@@ -231,10 +231,10 @@ a) int  b) float  c) list  d) bool
 ### 💪 Mini Exercise - Chapter 1
 
 **Latihan 1:** Buatlah program yang:
-- Meminta input nama (string)
-- Meminta input umur (integer) 
-- Meminta input tinggi badan (float)
-- Tampilkan informasi dengan format yang rapi
+- Berisi Variable nama (string)
+- Berisi Variable umur (integer) 
+- Berisi Variable tinggi badan (float)
+- Tampilkan informasi dengan format yang rapi. Misal "Nama saya adalah X umur saya Y tinggi badan saya Z"
 
 **Latihan 2:** Konversi tipe data berikut dan tampilkan hasilnya:
 ```python
