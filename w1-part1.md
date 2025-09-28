@@ -13,6 +13,10 @@ Python memiliki beberapa tipe data built-in yang fundamental:
 - **String (str)**: Teks
 - **Boolean (bool)**: True/False
 
+Catatan konseptual (ringkas dari bahan ajar):
+- Setiap program bekerja dengan data—teks, angka, atau kombinasi lain. Tipe data adalah “roda gigi” yang memungkinkan bagian program lainnya saling terhubung dan berjalan.
+- Python tidak mengejar jumlah tipe data yang sangat banyak; justru sederhana namun efektif sehingga kita bisa lebih fokus ke pemecahan masalah daripada detail teknis yang berlebihan.
+
 ### 1.2 Integer (Bilangan Bulat)
 
 ```python
@@ -31,6 +35,9 @@ print(f"Pembagian: {a / b}")    # Hasil: float
 print(f"Pembagian bulat: {a // b}")  # Hasil: int
 print(f"Modulo: {a % b}")
 ```
+
+Catatan konseptual (int vs float):
+- `100` (int) berbeda dengan `100.00` (float). Int cocok untuk bilangan bulat seperti jumlah nyawa atau item, sedangkan float dipakai untuk presisi desimal (misalnya pengurangan nyawa 1.5 poin per hit). Pilih tipe sesuai kebutuhan presisi perhitungan.
 
 ### 1.3 Float (Bilangan Desimal)
 
@@ -75,6 +82,10 @@ print(f"Nama saya {nama}, umur {umur} tahun")
 print("Nama saya {}, umur {} tahun".format(nama, umur))
 ```
 
+Catatan konseptual (apa itu string dan cara menampilkan):
+- String adalah kumpulan karakter yang dibatasi tanda kutip tunggal atau ganda.
+- Untuk menampilkan string, gunakan `print("teks")` atau variabel berisi teks. Spasi juga bagian dari string, jadi jika menggabungkan string, perhatikan penempatan spasi.
+
 ### 1.5 Boolean (Benar/Salah)
 
 ```python
@@ -95,6 +106,9 @@ print(a > b)   # True
 print(a == b)  # False
 print(a != b)  # True
 ```
+
+Catatan konseptual (peran boolean):
+- Boolean hanya memiliki dua nilai: `True` atau `False`. Tipe ini sangat penting untuk pengambilan keputusan (percabangan). Misal analogi: jika cuaca dingin maka bawa jaket, jika hangat maka bawa pakaian tipis—itulah logika True/False yang menuntun alur program.
 
 ### 1.6 Konversi Tipe Data
 
@@ -125,6 +139,78 @@ hasil_konversi = konversi_suhu("25.5")
 print(f"Hasil konversi: {hasil_konversi}")
 print(f"Tipe data: {type(hasil_konversi)}")
 ```
+
+Catatan konseptual (cek tipe dan konversi):
+- Python menentukan tipe variabel saat runtime (dinamis). Anda dapat memeriksa tipe dengan `type(x)` dan mengonversi antar tipe menggunakan konstruktor seperti `int()`, `float()`, `str()`, dan `bool()`.
+
+### 1.7 Variabel: Konsep, Penamaan, dan Penugasan (dari bahan ajar)
+
+Variabel adalah “wadah” untuk menyimpan data agar bisa dipanggil, diubah, atau dihapus saat dibutuhkan. Python bersifat dinamis—Anda tidak perlu mendeklarasikan tipe di awal; tipe ditentukan dari nilai yang diberikan.
+
+Contoh pembuatan variabel beragam tipe:
+
+```python
+name = "John"      # string
+age = 33            # integer
+weight = 131.50     # float
+is_married = True   # boolean (perhatikan huruf besar-kecil: True/False)
+```
+
+Mengecek tipe variabel:
+
+```python
+print(type(age))   # <class 'int'>
+```
+
+Multiple assignment (satu nilai ke beberapa variabel sekaligus):
+
+```python
+Age = Number = Point = 20
+print(Age, Number, Point)  # 20 20 20
+```
+
+Menampilkan beberapa variabel sekaligus (gunakan koma sebagai pemisah, bukan disambung tanpa pemisah):
+
+```python
+name = "Jonah"
+age = 47
+height_in_cm = 170
+occupation = "Programmer"
+
+print(name, age, height_in_cm, occupation)  # Jonah 47 170 Programmer
+
+# Hindari menulis seperti ini karena salah sintaks:
+# print(name age height_in_cm occupation)  # SyntaxError
+```
+
+Konkatenasi string dan perhatian spasi:
+
+```python
+first_name = "John"
+last_name = "Wick"
+
+print(first_name + last_name)       # JohnWick (tanpa spasi)
+print(first_name + " " + last_name) # John Wick (dengan spasi)
+```
+
+Menggabungkan string dengan angka: konversi dulu ke string menggunakan `str()` atau gunakan f-string:
+
+```python
+text1 = "Zero is equal to "
+text2 = 0
+print(text1 + str(text2))  # Zero is equal to 0
+
+# Alternatif yang lebih rapi: f-string (string formatting modern)
+show = "GOT"
+name1 = "Daenerys"; name2 = "Jon"; name3 = "Tyrion"; seasons = 8
+print(f"The show called {show} had characters like {name1}, {name2} and {name3} in all {seasons} seasons.")
+```
+
+Aturan penamaan variabel (ringkas):
+- Case-sensitive (`number` dan `Number` berbeda).
+- Tidak boleh diawali angka; karakter yang diizinkan: huruf, angka, dan underscore `_` (tanpa spasi).
+- Hindari memakai kata kunci Python sebagai nama variabel.
+- Gunakan nama yang bermakna untuk meningkatkan keterbacaan (misal `height_in_cm` daripada `hcm`).
 
 ### 🧠 Mini Quiz - Chapter 1
 
