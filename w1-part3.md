@@ -41,6 +41,10 @@ Setelah menyelesaikan modul ini, mahasiswa diharapkan dapat:
 
 Python menyediakan berbagai cara untuk membaca file dengan fungsi `open()`.
 
+Catatan konseptual (Data & Tipe Data – dari bahan ajar):
+- Program bekerja dengan data seperti teks dan angka—ini adalah “roda gigi” yang menggerakkan program. Saat membaca file, konten biasanya berupa string yang kadang perlu dikonversi ke angka (`int`, `float`) untuk perhitungan.
+- Tipe numerik: `int` (bulat) dan `float` (desimal). Gunakan `float` bila presisi dibutuhkan (misal 1.5), dan `int` untuk hitungan bulat.
+
 ```python
 # Membaca file teks sederhana
 def baca_file_sederhana(nama_file):
@@ -81,6 +85,9 @@ def baca_beberapa_baris(nama_file, jumlah_baris=5):
     except FileNotFoundError:
         return [f"File {nama_file} tidak ditemukan"]
 ```
+
+Catatan singkat (mode file):
+- "r": read, "w": write (timpa), "a": append (tambah di akhir), "x": exclusive create (gagal jika sudah ada). Gunakan `with` agar file otomatis tertutup.
 
 ### 1.2 Menulis File
 
@@ -436,13 +443,20 @@ def demo_regex():
     # Mencari email
     email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
     emails = re.findall(email_pattern, text)
-     print(f"Email: {emails}")
+    print(f"Email: {emails}")
     
 demo_string_formatting()
 print("\n" + "="*50 + "\n")
 demo_string_methods()
 print("\n" + "="*50 + "\n")
 demo_regex()
+```
+
+Catatan konseptual (Strings & Formatting – dari bahan ajar):
+- String adalah kumpulan karakter yang dibatasi tanda kutip tunggal atau ganda. Untuk menampilkan string gunakan `print("teks")`.
+- Saat menggabungkan string, perhatikan spasi: `"John" + " " + "Wick"` → "John Wick". Tanpa spasi hasilnya akan menempel.
+- Menggabungkan string dengan angka perlu konversi: `str(angka)` atau gunakan f-string: `f"Nilai: {angka}"`.
+- F-string memudahkan formatting, misalnya `f"{nilai:.2f}"` untuk 2 angka di belakang koma.
 
 ### 🧠 Mini Quiz - Chapter 2 (Tips & Trik Python)
 
@@ -462,16 +476,6 @@ Kunci: 1) b, 2) b, 3) c
 - Tulis fungsi summarize_numbers(angka) yang mengembalikan dict: min, max, mean, even_sq (kuadrat bilangan genap) menggunakan map/filter/reduce.
 - Buat fungsi sanitize_emails(teks) yang mengekstrak semua email valid dengan regex dan mengembalikannya unik (set → list terurut).
 - Implementasikan enumerate_like(iterable, start=1) yang meniru enumerate hanya dengan range dan indexing.
-    # Substitusi
-    clean_text = re.sub(r'\d+', '[NUMBER]', text)
-    print(f"Text with numbers replaced: {clean_text}")
-
-demo_string_formatting()
-print("\n" + "="*50 + "\n")
-demo_string_methods()
-print("\n" + "="*50 + "\n")
-demo_regex()
-```
 
 ### 2.4 Error Handling dan Debugging
 
@@ -568,6 +572,9 @@ validate_mahasiswa_data("Ahmad", 35, 3.75)
 print("\nTesting context manager:")
 demo_context_manager()
 ```
+
+Tips membaca error (dari bahan ajar – ringkas):
+- Periksa bagian bawah traceback untuk jenis error dan lokasi. Contoh umum: `SyntaxError: invalid syntax` karena pemisah yang hilang (gunakan `print(a, b, c)` bukan `print(a b c)`), atau tanda kutip/kurung tidak seimbang.
 
 ---
 
@@ -901,7 +908,7 @@ def comprehensive_page_analysis(url):
         
     except Exception as e:
         print(f"Error in comprehensive analysis: {e}")
-          return metadata
+        return metadata
 ```
 
 ### 🧠 Mini Quiz - Chapter 3 (Web Scraping Dasar)
