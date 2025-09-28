@@ -28,6 +28,11 @@ salam_personal("Ahmad")
 salam_personal("Siti")
 ```
 
+Catatan konseptual (fungsi dan modularitas, dari bahan ajar):
+- Fungsi adalah blok kode yang bisa dipanggil berulang untuk mengurangi pengulangan (reusability) dan membuat program terstruktur.
+- Penamaan yang jelas meningkatkan keterbacaan: gunakan snake_case dan nama yang bermakna.
+- Jika sebuah fungsi tidak memiliki `return`, maka nilai kembalian default-nya adalah `None`.
+
 ### 1.2 Function dengan Return Value
 
 ```python
@@ -60,6 +65,10 @@ def hitung_lingkaran(radius):
 luas, keliling = hitung_lingkaran(7)
 print(f"Luas: {luas:.2f}, Keliling: {keliling:.2f}")
 ```
+
+Catatan konseptual (nilai kembalian):
+- Tanpa `return`, Python mengembalikan `None` (berguna untuk fungsi yang hanya memiliki efek samping seperti print/logging).
+- Fungsi bisa mengembalikan lebih dari satu nilai dengan mengembalikan tuple, lalu di-unpack ke beberapa variabel.
 
 ### 1.3 Parameter Types
 
@@ -100,6 +109,11 @@ def tampilkan_info(**kwargs):
 tampilkan_info(nama="Ahmad", umur=25, kota="Jakarta", pekerjaan="Developer")
 ```
 
+Catatan konseptual (parameter):
+- Positional vs keyword arguments: keyword arguments memungkinkan urutan argumen fleksibel dan meningkatkan kejelasan.
+- Default parameter memberi nilai bawaan jika argumen tidak diberikan.
+- `*args` menampung sejumlah argumen posisi yang variatif; `**kwargs` menampung pasangan key-value yang variatif.
+
 ### 1.4 Scope dan Local vs Global Variables
 
 ```python
@@ -136,6 +150,10 @@ def increment_counter():
 increment_counter()
 increment_counter()
 ```
+
+Catatan konseptual (scope dan variabel):
+- Variabel lokal hidup di dalam fungsi; variabel global dapat diakses di seluruh modul, namun penggunaannya sebaiknya dibatasi untuk menghindari efek samping tak terduga.
+- Python bertipe dinamis: tipe variabel ditentukan saat runtime oleh nilai yang diberikan.
 
 ### 🧠 Mini Quiz - Chapter 1
 
@@ -224,6 +242,10 @@ nilai = input_angka("Masukkan nilai (0-100): ")
 print(f"Nilai yang dimasukkan: {nilai}")
 ```
 
+Catatan konseptual (input dan validasi):
+- `input()` selalu mengembalikan string; gunakan konversi `int()`/`float()` sebelum perhitungan numerik.
+- Validasi input dan penanganan kesalahan (`try/except`) penting untuk pengalaman pengguna yang baik.
+
 ### 2.2 Format Output
 
 ```python
@@ -251,6 +273,10 @@ from datetime import datetime
 sekarang = datetime.now()
 print(f"Sekarang: {sekarang:%Y-%m-%d %H:%M:%S}")
 ```
+
+Catatan konseptual (string formatting dari bahan ajar):
+- F-string menggunakan placeholder dalam kurung kurawal `{}` untuk menyisipkan variabel/ekspresi.
+- Perhatikan spasi saat menggabungkan string (concatenation) agar hasil tampilan sesuai harapan.
 
 ### 2.3 File I/O
 
@@ -283,6 +309,9 @@ data_mhs = [
 simpan_data_mahasiswa(data_mhs)
 print(baca_data_mahasiswa())
 ```
+
+Catatan konseptual (mode file singkat):
+- "r" untuk membaca, "w" untuk menulis (overwrite), "a" untuk menambah di akhir (append), dan "x" untuk membuat file baru (gagal jika sudah ada).
 
 ### 2.4 Interactive Menu System
 
@@ -838,6 +867,10 @@ grades = ["A", "B", "C", "D", "E", "X"]
 for g in grades:
     print(f"Grade {g}: {interpretasi_grade(g)}")
 ```
+
+Tips membaca error (troubleshooting singkat dari bahan ajar):
+- Baca pesan error dari baris terbawah—sering kali memberi tahu jenis dan lokasi kesalahan (misal `SyntaxError: invalid syntax`).
+- Kesalahan umum: lupa pemisah koma saat mencetak banyak variabel (`print(a, b, c)` bukan `print(a b c)`), atau kurangnya tanda kurung/tanda kutip pada string.
 
 ### 4.4 Nested Conditions dan Optimization
 
