@@ -185,7 +185,7 @@ print(name, age, height_in_cm, occupation)  # Jonah 47 170 Programmer
 # print(name age height_in_cm occupation)  # SyntaxError
 ```
 
-Konkatenasi string dan perhatian spasi:
+Konkatenasi (Concat) string dan perhatian spasi:
 
 ```python
 first_name = "John"
