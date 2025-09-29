@@ -25,6 +25,8 @@ umur = 25
 jumlah_siswa = 30
 tahun = 2024
 
+print(f"Umur saya {umur}, kelas saya berjumlah {jumlah_siswa}, saya angkatan tahun {tahun}")
+
 # Operasi matematika dengan integer
 a = 10
 b = 3
